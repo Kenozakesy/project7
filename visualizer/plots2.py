@@ -1,29 +1,41 @@
 import matplotlib
 import matplotlib.pyplot as plt
 import numpy as np
+from random import randint
+import namegenerator
 from numpy import ndarray
 import array
 
-labels = ['G1', 'G2', 'G3', 'G4', 'G5']
-
-means = [1, 2, 3, 4, 5]
+labels = ['2017', '2018', '2019', '2020', '2021']
 
 x = np.arange(len(labels))  # the label locations
-width = 0.25  # the width of the bars
+size = 10
 
-rects = ndarray((5,), int)
+width = 1 / (size * 1.3)  # the width of the bars
 
+rects = []
 fig, ax = plt.subplots()
-rects[0] = ax.bar(x - width / 2, means, width, label='Avans')
-rects[1] = ax.bar(x + width / 2, means, width, label='HAS')
-rects[2] = ax.bar(x + width * 1.5, means, width, label='Whatever Fontys is doing')
+
+even = None
+if (size % 2) == 0:
+    even = True
+else:
+    even = False
+
+means = []
+# multiplier = size
+for i in range(size):
+    for t in range(5):
+        means.append(randint(1, 9))
+    rects.append(ax.bar(x - ((size - 1) * width / 2) + (width * i), means, width, label=(namegenerator.gen())))
+    means = []
 
 # Add some text for labels, title and custom x-axis tick labels, etc.
 ax.set_ylabel('performance index')
 ax.set_title('Performance level of schools')
 ax.set_xticks(x)
 ax.set_xticklabels(labels)
-ax.legend()
+# ax.legend() #turn on legend
 
 
 def autolabel(rects):
@@ -34,11 +46,10 @@ def autolabel(rects):
         if height < 0:
             vertical = -10
         else:
-            vertical = 3
+            vertical = 2
 
         ax.annotate('{}'.format(height),
                     xy=(rect.get_x() + rect.get_width() / 2, height),
-
                     xytext=(0, vertical),  # 3 points vertical offset
                     textcoords="offset points",
                     ha='center', va='bottom')

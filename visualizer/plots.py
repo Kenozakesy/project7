@@ -11,9 +11,9 @@ x = np.arange(len(labels))  # the label locations
 width = 0.25  # the width of the bars
 
 fig, ax = plt.subplots()
-rects1 = ax.bar(x - width / 2, avans_means, width, label='Avans')
-rects2 = ax.bar(x + width / 2, has_means, width, label='HAS')
-rects3 = ax.bar(x + width * 1.5, fontys_means, width, label='Whatever Fontys is doing')
+rects1 = ax.bar(x - width, avans_means, width, label='Avans')
+rects2 = ax.bar(x + width, has_means, width, label='HAS')
+rects3 = ax.bar(x, fontys_means, width, label='Whatever Fontys is doing')
 
 # Add some text for labels, title and custom x-axis tick labels, etc.
 ax.set_ylabel('Performance index')
